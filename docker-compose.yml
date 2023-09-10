@@ -1,0 +1,31 @@
+version: '3.1'
+services:
+  db:
+    image: mysql
+    container_name: mysql-security
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - spring-security_data:/var/lib/mysql
+volumes:
+  spring-security_data:
+
+#    COMANDOS DOCKER (Pesquisar as opções disponiveis para cada comando)
+
+#    docker run: Executa um contêiner a partir de uma imagem.
+#    docker build: Cria uma nova imagem a partir de um Dockerfile.
+#    docker pull: Baixa uma imagem do Docker Hub ou de um registro.
+#    docker ps: Lista contêineres em execução.
+#    docker images: Lista imagens disponíveis localmente.
+#    docker stop: Para um ou mais contêineres em execução.
+#    docker start: Inicia um contêiner parado.
+#    docker restart: Reinicia um contêiner.
+#    docker exec: Executa um comando dentro de um contêiner em execução.
+#    docker rm: Remove um ou mais contêineres.
+#    docker rmi: Remove uma ou mais imagens.
+#    docker network: Gerencia redes Docker.
+#    docker volume: Gerencia volumes Docker.
+#    docker-compose up -d: Inicia serviços definidos em um arquivo Docker Compose no modo de segundo plano.
+#    docker-compose down: Para e remove contêineres definidos em um arquivo Docker Compose.
