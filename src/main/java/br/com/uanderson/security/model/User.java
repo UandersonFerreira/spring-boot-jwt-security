@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.NaturalId;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,17 +12,19 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDateTime;
 import java.util.*;
 
+
+@Entity
+@Table(name = "users")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Entity
-@Table(name = "users")
 public class User implements UserDetails {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String userId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String username;
-    @NaturalId(mutable = true)
+    @Column(unique = true)
     private String email;
     private String password;
     private String mobileNumber;
@@ -45,20 +46,23 @@ public class User implements UserDetails {
         this.roles = roles;
     }
 
-    @PrePersist//é usada para marcar um método que deve ser executado antes que uma nova entidade seja persistida no banco de dados
-    protected void onCreated(){
+    @PrePersist
+//é usada para marcar um método que deve ser executado antes que uma nova entidade seja persistida no banco de dados
+    protected void onCreated() {
         this.createdAt = LocalDateTime.now();
     }
 
-    @PreUpdate//é usada para marcar um método que deve ser executado antes que uma entidade existente seja atualizada no banco de dados.
-    protected void onUpdate(){
+    @PreUpdate
+//é usada para marcar um método que deve ser executado antes que uma entidade existente seja atualizada no banco de dados.
+    protected void onUpdate() {
         this.updatedAt = LocalDateTime.now();
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-       Collection<SimpleGrantedAuthority> authoritiesList = new ArrayList<>();
-       this.roles.stream().forEach(auth -> authoritiesList.add(new SimpleGrantedAuthority(auth.getName())));
-       return List.of(new SimpleGrantedAuthority(authoritiesList.toString()));
+        Collection<SimpleGrantedAuthority> authoritiesList = new ArrayList<>();
+        this.roles.stream().forEach(auth -> authoritiesList.add(new SimpleGrantedAuthority(auth.getName())));
+        return List.of(new SimpleGrantedAuthority(authoritiesList.toString()));
     }
 
     @Override
@@ -91,6 +95,8 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
 }//class
 
 /*

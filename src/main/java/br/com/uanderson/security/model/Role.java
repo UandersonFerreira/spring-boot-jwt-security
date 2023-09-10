@@ -6,12 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,7 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "users")
+@Table(name = "roles")
 public class Role {
     @Id
     @SequenceGenerator(
@@ -38,8 +34,8 @@ public class Role {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     @ManyToMany(mappedBy = "roles")
-    @Fetch(value = FetchMode.SELECT)// é uma estratégia de busca que faz com que as associações sejam carregadas quando necessário
-    @JsonIgnore//Esta anotação é usada para instruir o sistema a não serializar o campo user quando o objeto Role é convertido em formato JSON
+    @JsonIgnore
+//Esta anotação é usada para instruir o sistema a não serializar o campo user quando o objeto Role é convertido em formato JSON
     private Set<User> user = new HashSet<>();//O HashSet é usado para garantir que os objetos dentro da coleção sejam exclusivos
     /*
     private Set<User> user = new HashSet<>();
@@ -60,13 +56,15 @@ public class Role {
         this.name = name;
     }
 
-    @PrePersist//é usada para marcar um método que deve ser executado antes que uma nova entidade seja persistida no banco de dados
-    protected void onCreated(){
+    @PrePersist
+//é usada para marcar um método que deve ser executado antes que uma nova entidade seja persistida no banco de dados
+    protected void onCreated() {
         this.createdAt = LocalDateTime.now();
     }
 
-    @PreUpdate//é usada para marcar um método que deve ser executado antes que uma entidade existente seja atualizada no banco de dados.
-    protected void onUpdate(){
+    @PreUpdate
+//é usada para marcar um método que deve ser executado antes que uma entidade existente seja atualizada no banco de dados.
+    protected void onUpdate() {
         this.updatedAt = LocalDateTime.now();
     }
 
