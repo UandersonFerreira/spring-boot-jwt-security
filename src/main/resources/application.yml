@@ -16,9 +16,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
   main:
-    allow-circular-references: true
-#  é usada para permitir ou proibir a criação de referências circulares entre beans em seu aplicativo Spring
-
+    allow-circular-references: true #  é usada para permitir ou proibir a criação de referências circulares entre beans em seu aplicativo Spring
 logging:
   level:
     org:
