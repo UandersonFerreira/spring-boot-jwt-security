@@ -19,7 +19,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
 
-@Service@RequiredArgsConstructor
+@Service @RequiredArgsConstructor
 public class JwtService {
     @Value("${secret.key}")
     private String secretKey;
