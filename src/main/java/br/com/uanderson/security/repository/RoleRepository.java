@@ -16,8 +16,9 @@ public interface RoleRepository extends JpaRepository<Role, Long> {
             JOIN user_role ur ON u.id = ur.user_id
             JOIN roles r ON r.id = ur.role_id
             WHERE ur.user_id = ur.role_id
-            AND u.email = :email;
+            AND u.email =: 'demouser@gmail.com';
             """, nativeQuery = true)
-    List<Role> getRole(@Param("email") String email);
+    List<Role> getRole(String email);
+
 
 }

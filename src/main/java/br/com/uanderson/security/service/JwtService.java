@@ -2,6 +2,7 @@ package br.com.uanderson.security.service;
 
 import br.com.uanderson.security.model.User;
 import br.com.uanderson.security.repository.RoleCustomRepository;
+import br.com.uanderson.security.repository.RoleRepository;
 import br.com.uanderson.security.repository.UserRepository;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTCreator;
@@ -21,8 +22,8 @@ import java.util.stream.Collectors;
 
 @Service @RequiredArgsConstructor
 public class JwtService {
-    @Value("${secret.key}")
-    private String secretKey;
+//    @Value("${secret.key}")
+    private String secretKey = "123";
 
     private final UserRepository userRepository;
     private final RoleCustomRepository roleCustomRepository;

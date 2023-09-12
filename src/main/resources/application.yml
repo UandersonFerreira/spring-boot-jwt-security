@@ -15,6 +15,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
   main:
     allow-circular-references: true #  é usada para permitir ou proibir a criação de referências circulares entre beans em seu aplicativo Spring
 

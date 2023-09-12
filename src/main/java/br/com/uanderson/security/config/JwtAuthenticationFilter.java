@@ -32,8 +32,8 @@ import static org.springframework.util.MimeTypeUtils.APPLICATION_JSON_VALUE;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private final UserRepository userRepository;
-    @Value("${secret.key}")
-    private String secretKey;
+//    @Value("${secret.key}")
+    private String secretKey = "123";
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
@@ -41,7 +41,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         String authorizationHeader = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
             try {
-                String token = authorizationHeader.substring("Bearer".length());
+                String token = authorizationHeader.substring("Bearer ".length());
                 Algorithm algorithm = Algorithm.HMAC256(secretKey.getBytes());
 
                 JWTVerifier jwtVerifier = JWT.require(algorithm).build();

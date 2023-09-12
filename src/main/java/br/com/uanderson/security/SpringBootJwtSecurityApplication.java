@@ -18,12 +18,13 @@ public class SpringBootJwtSecurityApplication {
 
     }
 
+/*
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-/*    @Bean
+   @Bean
     public CommandLineRunner run(UserService userService) {
         return args -> {
             userService.saveRole(new Role(null, "ROLE_USER", "This is User"));
